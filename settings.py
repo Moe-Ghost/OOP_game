@@ -1,0 +1,2 @@
+START_LIVES = 1
+ALLOWED_ATTACK = ['1', '2', '3']
