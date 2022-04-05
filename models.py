@@ -3,27 +3,28 @@ from random import randint
 from exceptions import EnemyDown, GameOver
 from settings import START_LIVES, ALLOWED_ATTACK
 
+#enemy model
 class Enemy():
     def __init__(self, level):
         self.level = level
         self.lives = self.level
-        
+#randomly setting enemys choise
     @staticmethod
     def select_attack():
         return randint(1,3)
-
+#decrease enemys life on defeat
     def decrease_lives(self):
         self.lives -= 1
         if self.lives == 0:
             raise EnemyDown
-
+#player model
 class Player():
     allowed_attack = ALLOWED_ATTACK
     lives = START_LIVES
     score = 0
     def __init__(self, name):
         self.name = name
-
+#main fight logic
     @staticmethod
     def fight(attack, defense):
         if attack > defense or attack - defense == -2:
@@ -31,12 +32,12 @@ class Player():
         if attack < defense or attack - defense == 2:
             return 1
         return 0
-        
+#declrease players life on defeat        
     def decrease_lives(self):
         self.lives -= 1
         if self.lives == 0:
             raise GameOver
-    
+#players turn to attack    
     def attack(self, enemy_obj):
         while True:
             player_attack = input("Player choise: ")
@@ -56,7 +57,7 @@ class Player():
 
         enemy_obj.decrease_lives()
         return "You attacked successfully!\n"
-
+#enemys turn to attack
     def defense(self, enemy_obj):
         while True:
             player_attack = input("Player attack: ")
